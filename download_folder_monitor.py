@@ -4,7 +4,7 @@ import pathlib
 import shutil
 import time
 
-downloads_path = "/home/bali/Downloads/"
+target_folder = "/home/bali/Downloads/"
 is_image = ['.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif', '.psd', '.webp', '.svg', '.raw', '.arw', '.cr2', '.nrw', '.k25', '.svgz', '.ai', '.eps']
 is_video = video_file_extensions = [
     '.264', '.3g2', '.3gp', '.3gp2', '.3gpp', '.3gpp2', '.3mm', '.3p2', '.60d', '.787', '.89', '.aaf', '.aec', '.aep', '.aepx',
@@ -45,30 +45,30 @@ def move_file(destination_path, file_name, file_ext, file_name_plain):
     if not path.exists(destination_path):
         os.mkdir(destination_path)
     for files in os.listdir(destination_path):
-        file_path = os.path.join(downloads_path, files)
+        file_path = os.path.join(target_folder, files)
         if os.path.exists(destination_path+file_name):
             file_name_new = file_name_plain+"copy("+ str(round(time.time())) +")"+file_ext 
     else:
         file_name_new = file_name 
     
-    shutil.move(downloads_path+file_name, destination_path+file_name_new)
+    shutil.move(target_folder+file_name, destination_path+file_name_new)
 
-for files in os.listdir(downloads_path):
-    file_path = os.path.join(downloads_path, files)
+for files in os.listdir(target_folder):
+    file_path = os.path.join(target_folder, files)
     if os.path.isfile(file_path): 
         file_extension = pathlib.Path(file_path).suffix
         file_name_plain = pathlib.Path(file_path).stem
         if file_extension.lower() in is_image:
-            move_file("/home/bali/Downloads/Images/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Images/", files, file_extension, file_name_plain)
         if file_extension.lower() in is_video:
-            move_file("/home/bali/Downloads/Videos/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Videos/", files, file_extension, file_name_plain)
         if file_extension.lower() in is_document:
-            move_file("/home/bali/Downloads/Documents/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Documents/", files, file_extension, file_name_plain)
         if file_extension.lower() in is_program:
-            move_file("/home/bali/Downloads/Programs/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Programs/", files, file_extension, file_name_plain)
         if file_extension.lower() in is_compressed:
-            move_file("/home/bali/Downloads/Compressed/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Compressed/", files, file_extension, file_name_plain)
         if file_extension.lower() in is_font:
-            move_file("/home/bali/Downloads/Fonts/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Fonts/", files, file_extension, file_name_plain)
         else :
-            move_file("/home/bali/Downloads/Miscs/", files, file_extension, file_name_plain)
+            move_file(target_folder + "Miscs/", files, file_extension, file_name_plain)
