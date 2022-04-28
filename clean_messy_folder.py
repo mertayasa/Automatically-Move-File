@@ -5,7 +5,7 @@ import shutil
 import time
 
 target_folder = "/home/bali/Downloads/"
-is_image = ['.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif', '.psd', '.webp', '.svg', '.raw', '.arw', '.cr2', '.nrw', '.k25', '.svgz', '.ai', '.eps']
+is_image = ['.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif', '.psd', '.webp', '.svg', '.raw', '.arw', '.cr2', '.nrw', '.k25', '.svgz', '.ai', '.eps', '.xcf']
 is_video = video_file_extensions = [
     '.264', '.3g2', '.3gp', '.3gp2', '.3gpp', '.3gpp2', '.3mm', '.3p2', '.60d', '.787', '.89', '.aaf', '.aec', '.aep', '.aepx',
     '.aet', '.aetx', '.ajp', '.ale', '.am', '.amc', '.amv', '.amx', '.anim', '.aqt', '.arcut', '.arf', '.asf', '.asx', '.avb',
@@ -37,7 +37,7 @@ is_video = video_file_extensions = [
     '.zm1', '.zm2', '.zm3', '.zmv'
 ]
 is_document = ['.pdf', '.doc', '.docx', '.odt', '.xls', '.xlsx', '.ods', '.ppt', '.pptx', '.txt']
-is_program = ['.html', '.htm', '.php', '.py', '.sh', '.sql', '.rpm', '.deb', '.appimage', '.dart', '.css', '.js', '.jsx', '.env', '.json', '.md', '.htaccess', '.log', '.conf']
+is_program = ['.html', '.htm', '.php', '.py', '.sh', '.sql', '.rpm', '.deb', '.appimage', '.dart', '.css', '.js', '.jsx', '.env', '.json', '.md', '.htaccess', '.log', '.conf', '.xml', '.yml', '.key']
 is_compressed = ['.tar', '.gz', '.zip', '.rar', '.xz', '.7zip']
 is_font = ['.jfproj', '.ttf', '.pfa', '.woff', '.fnt', '.otf', '.woff2', '.odttf']
 
@@ -51,11 +51,12 @@ def move_file(destination_path, file_name, file_ext, file_name_plain):
     else:
         file_name_new = file_name 
     
-    shutil.move(target_folder+file_name, destination_path+file_name_new)
+    if(os.path.exists(target_folder+file_name)):
+        shutil.move(target_folder+file_name, destination_path+file_name_new)
 
 for files in os.listdir(target_folder):
     file_path = os.path.join(target_folder, files)
-    if os.path.isfile(file_path): 
+    if os.path.isfile(file_path):
         file_extension = pathlib.Path(file_path).suffix
         file_name_plain = pathlib.Path(file_path).stem
         if file_extension.lower() in is_image:
